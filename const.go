@@ -1,4 +1,3 @@
-// Package math32 provides basic constants and mathematical functions for float32 types.
 package math32
 
 // Mathematical constants.
