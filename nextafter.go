@@ -4,7 +4,7 @@
 
 package math32
 
-// Nextafter32 returns the next representable float32 value after x towards y.
+// Nextafter returns the next representable float32 value after x towards y.
 //
 // Special cases are:
 //	Nextafter32(x, x)   = x

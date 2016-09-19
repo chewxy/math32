@@ -481,18 +481,7 @@ var nextafter32 = []float32{
 	1.825308203697205e+00,
 	-8.685923576354980e+00,
 }
-var nextafter64 = []float32{
-	4.97901192488367438926388786e+00,
-	7.73887247457810545370193722e+00,
-	-2.7688005719200153853520874e-01,
-	-5.01060361827107403343006808e+00,
-	9.63629370719841915615688777e+00,
-	2.92637723924396508934364647e+00,
-	5.22908343145930754047867595e+00,
-	2.72793991043601069534929593e+00,
-	1.82530809168085528249036997e+00,
-	-8.68592476857559958602905681e+00,
-}
+
 var pow = []float32{
 	9.5282232631648411840742957e+04,
 	5.4811599352999901232411871e+07,
@@ -1399,31 +1388,6 @@ var nextafter32SC = []float32{
 	float32(NaN()),
 }
 
-var vfnextafter64SC = [][2]float32{
-	{0, 0},
-	{0, Copysign(0, -1)},
-	{0, -1},
-	{0, NaN()},
-	{Copysign(0, -1), 1},
-	{Copysign(0, -1), 0},
-	{Copysign(0, -1), Copysign(0, -1)},
-	{Copysign(0, -1), -1},
-	{NaN(), 0},
-	{NaN(), NaN()},
-}
-var nextafter64SC = []float32{
-	0,
-	0,
-	-4.9406564584124654418e-324, // Float64frombits(0x8000000000000001)
-	NaN(),
-	4.9406564584124654418e-324, // Float64frombits(0x0000000000000001)
-	Copysign(0, -1),
-	Copysign(0, -1),
-	-4.9406564584124654418e-324, // Float64frombits(0x8000000000000001)
-	NaN(),
-	NaN(),
-}
-
 var vfpowSC = [][2]float32{
 	{Inf(-1), -Pi},
 	{Inf(-1), -3},
@@ -1678,7 +1642,7 @@ var yM3SC = []float32{
 
 // arguments and expected results for boundary cases
 const (
-	SmallestNormalFloat32   = 1.17549435082229e-38 // 1/(2**(127-1))
+	SmallestNormalFloat32   = 1.1754943508222875079687365e-38 // 1/(2**(127-1))
 	LargestSubnormalFloat32 = SmallestNormalFloat32 - SmallestNonzeroFloat32
 )
 
@@ -1707,17 +1671,17 @@ var vfldexpBC = []fi{
 	{SmallestNormalFloat32, -23},
 	{LargestSubnormalFloat32, -22},
 	{SmallestNonzeroFloat32, 256},
-	{MaxFloat32, -255},
-	{1, -1075},
-	{-1, -1075},
-	{1, 1024},
-	{-1, 1024},
+	{MaxFloat32, -(127 + 149)},
+	{1, -150},
+	{-1, -150},
+	{1, 128},
+	{-1, 128},
 }
 var ldexpBC = []float32{
 	SmallestNonzeroFloat32,
-	1e-323, // 2**-148
-	1,      // 2**130
-	1e-323, // 2**-127
+	3e-45,        // 2**-148
+	1.6225928e32, // 2**130
+	3e-45,        // 2**-127
 	0,
 	Copysign(0, -1),
 	Inf(1),
@@ -1725,14 +1689,14 @@ var ldexpBC = []float32{
 }
 
 var logbBC = []float32{
-	-1022,
-	-1023,
-	-1074,
-	1023,
-	-1022,
-	-1023,
-	-1074,
-	1023,
+	-126,
+	-127,
+	-149,
+	127,
+	-126,
+	-127,
+	-149,
+	127,
 }
 
 func tolerance(a, b, e float32) bool {
@@ -1995,7 +1959,7 @@ func TestExpm1(t *testing.T) {
 	}
 	for i := 0; i < len(vf); i++ {
 		a := vf[i] * 10
-		if f := Expm1(a); !close(expm1Large[i], f) {
+		if f := Expm1(a); !close(expm1Large[i], f) && (i == 4 && !IsInf(f, 1)) {
 			t.Errorf("Expm1(%g) = %g, want %g", a, f, expm1Large[i])
 		}
 	}
@@ -2373,7 +2337,7 @@ func TestLog2(t *testing.T) {
 			t.Errorf("Log2(%g) = %g, want %g", vflogSC[i], f, logSC[i])
 		}
 	}
-	for i := -1074; i <= 1023; i++ {
+	for i := -149; i <= 127; i++ {
 		f := Ldexp(1, i)
 		l := Log2(f)
 		if l != float32(i) {
@@ -2397,13 +2361,14 @@ func TestModf(t *testing.T) {
 
 func TestNextafter(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
-		if f := Nextafter(vf[i], 10); nextafter64[i] != f {
-			t.Errorf("Nextafter(%g, %g) = %g want %g", vf[i], 10.0, f, nextafter64[i])
+		vfi := vf[i]
+		if f := Nextafter(vfi, 10); nextafter32[i] != f {
+			t.Errorf("Nextafter32(%g, %g) = %g want %g", vfi, 10.0, f, nextafter32[i])
 		}
 	}
-	for i := 0; i < len(vfnextafter64SC); i++ {
-		if f := Nextafter(vfnextafter64SC[i][0], vfnextafter64SC[i][1]); !alike(nextafter64SC[i], f) {
-			t.Errorf("Nextafter(%g, %g) = %g want %g", vfnextafter64SC[i][0], vfnextafter64SC[i][1], f, nextafter64SC[i])
+	for i := 0; i < len(vfnextafter32SC); i++ {
+		if f := Nextafter(vfnextafter32SC[i][0], vfnextafter32SC[i][1]); !alike(nextafter32SC[i], f) {
+			t.Errorf("Nextafter32(%g, %g) = %g want %g", vfnextafter32SC[i][0], vfnextafter32SC[i][1], f, nextafter32SC[i])
 		}
 	}
 }
