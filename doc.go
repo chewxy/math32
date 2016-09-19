@@ -22,7 +22,6 @@ At its core, it's mostly just a wrapper in form of float32(math.XXX). This appli
 	Log1p
 	Log2
 	Logb
-	Pow
 	Pow10
 	Remainder
 	Sin
