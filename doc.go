@@ -17,13 +17,11 @@ At its core, it's mostly just a wrapper in form of float32(math.XXX). This appli
 	J0
 	J1
 	Jn
-	Log
 	Log10
 	Log1p
 	Log2
 	Logb
 	Pow10
-	Remainder
 	Sin
 	Sinh
 	Tan
