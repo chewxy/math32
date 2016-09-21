@@ -2077,7 +2077,7 @@ func TestMin(t *testing.T) {
 
 func TestMod(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
-		if f := Mod(10, vf[i]); fmod[i] != f {
+		if f := Mod(10, vf[i]); !close(fmod[i], f) {
 			t.Errorf("Mod(10, %g) = %g, want %g", vf[i], f, fmod[i])
 		}
 	}
@@ -2168,7 +2168,7 @@ func TestIlogb(t *testing.T) {
 
 func TestJ0(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
-		if f := J0(vf[i]); !soclose(j0[i], f, 4e-14) {
+		if f := J0(vf[i]); !soclose(j0[i], f, 4e-6) {
 			t.Errorf("J0(%g) = %g, want %g", vf[i], f, j0[i])
 		}
 	}
@@ -2255,7 +2255,7 @@ func TestLgamma(t *testing.T) {
 func TestLog(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
 		a := Abs(vf[i])
-		if f := Log(a); log[i] != f {
+		if f := Log(a); !close(log[i], f) {
 			t.Errorf("Log(%g) = %g, want %g", a, f, log[i])
 		}
 	}
@@ -2396,7 +2396,7 @@ func TestPow10(t *testing.T) {
 
 func TestRemainder(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
-		if f := Remainder(10, vf[i]); remainder[i] != f {
+		if f := Remainder(10, vf[i]); !close(remainder[i], f) {
 			t.Errorf("Remainder(10, %g) = %g, want %g", vf[i], f, remainder[i])
 		}
 	}
