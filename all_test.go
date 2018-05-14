@@ -2133,20 +2133,6 @@ func TestHypot(t *testing.T) {
 	}
 }
 
-func TestHypotGo(t *testing.T) {
-	for i := 0; i < len(vf); i++ {
-		a := Abs(1e20 * tanh[i] * Sqrt(2))
-		if f := HypotGo(1e20*tanh[i], 1e20*tanh[i]); !veryclose(a, f) {
-			t.Errorf("HypotGo(%g, %g) = %g, want %g", 1e20*tanh[i], 1e20*tanh[i], f, a)
-		}
-	}
-	for i := 0; i < len(vfhypotSC); i++ {
-		if f := HypotGo(vfhypotSC[i][0], vfhypotSC[i][1]); !alike(hypotSC[i], f) {
-			t.Errorf("HypotGo(%g, %g) = %g, want %g", vfhypotSC[i][0], vfhypotSC[i][1], f, hypotSC[i])
-		}
-	}
-}
-
 func TestIlogb(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
 		a := frexp[i].i - 1 // adjust because fr in the interval [½, 1)
@@ -2801,12 +2787,6 @@ func BenchmarkGamma(b *testing.B) {
 func BenchmarkHypot(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		Hypot(3, 4)
-	}
-}
-
-func BenchmarkHypotGo(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		HypotGo(3, 4)
 	}
 }
 
