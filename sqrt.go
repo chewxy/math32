@@ -1,7 +1,5 @@
 package math32
 
-func Sqrt(x float32) float32
-
 // TODO: add assembly for !build noasm
 func sqrt(x float32) float32 {
 	// special cases

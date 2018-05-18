@@ -1,7 +1,5 @@
 package math32
 
-func Exp(x float32) float32
-
 func exp(x float32) float32 {
 	const (
 		Ln2Hi = float32(6.9313812256e-01)
