@@ -1,3 +1,5 @@
+// +build riscv
+
 #include "textflag.h"
 
 // func Exp(x float32) float32
