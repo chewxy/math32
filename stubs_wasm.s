@@ -1,3 +1,5 @@
+// +build wasm
+
 #include "textflag.h"
 
 // func Exp(x float32) float32
