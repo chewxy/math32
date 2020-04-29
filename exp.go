@@ -54,9 +54,7 @@ func exp(x float32) float32 {
 // Exp2 returns 2**x, the base-2 exponential of x.
 //
 // Special cases are the same as Exp.
-func Exp2(x float32) float32 {
-	return exp2(x)
-}
+func Exp2(x float32) float32
 
 func exp2(x float32) float32 {
 	const (
