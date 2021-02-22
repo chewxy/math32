@@ -2439,26 +2439,26 @@ func TestSinh(t *testing.T) {
 	}
 }
 
-// func TestSqrt(t *testing.T) {
-// 	for i := 0; i < len(vf); i++ {
-// 		a := Abs(vf[i])
-// 		if f := SqrtGo(a); sqrt[i] != f {
-// 			t.Errorf("SqrtGo(%g) = %g, want %g", a, f, sqrt[i])
-// 		}
-// 		a = Abs(vf[i])
-// 		if f := Sqrt(a); sqrt[i] != f {
-// 			t.Errorf("Sqrt(%g) = %g, want %g", a, f, sqrt[i])
-// 		}
-// 	}
-// 	for i := 0; i < len(vfsqrtSC); i++ {
-// 		if f := SqrtGo(vfsqrtSC[i]); !alike(sqrtSC[i], f) {
-// 			t.Errorf("SqrtGo(%g) = %g, want %g", vfsqrtSC[i], f, sqrtSC[i])
-// 		}
-// 		if f := Sqrt(vfsqrtSC[i]); !alike(sqrtSC[i], f) {
-// 			t.Errorf("Sqrt(%g) = %g, want %g", vfsqrtSC[i], f, sqrtSC[i])
-// 		}
-// 	}
-// }
+func TestSqrt(t *testing.T) {
+	for i := 0; i < len(vf); i++ {
+		a := Abs(vf[i])
+		if f := SqrtGo(a); sqrt[i] != f {
+			t.Errorf("SqrtGo(%g) = %g, want %g", a, f, sqrt[i])
+		}
+		a = Abs(vf[i])
+		if f := Sqrt(a); sqrt[i] != f {
+			t.Errorf("Sqrt(%g) = %g, want %g", a, f, sqrt[i])
+		}
+	}
+	for i := 0; i < len(vfsqrtSC); i++ {
+		if f := SqrtGo(vfsqrtSC[i]); !alike(sqrtSC[i], f) {
+			t.Errorf("SqrtGo(%g) = %g, want %g", vfsqrtSC[i], f, sqrtSC[i])
+		}
+		if f := Sqrt(vfsqrtSC[i]); !alike(sqrtSC[i], f) {
+			t.Errorf("Sqrt(%g) = %g, want %g", vfsqrtSC[i], f, sqrtSC[i])
+		}
+	}
+}
 
 func TestTan(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
