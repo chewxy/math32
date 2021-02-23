@@ -108,3 +108,6 @@ overflow: // return +Inf
 notNegInf: // NaN or +Inf, return x
 	MOVL    BX, ret+8(FP)
 	RET
+
+TEXT ·Exp2(SB),NOSPLIT,$0
+	JMP  ·exp2(SB)
