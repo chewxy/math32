@@ -1,5 +1,7 @@
 package math32
 
+import "math"
+
 // Dim returns the maximum of x-y or 0.
 //
 // Special cases are:
@@ -11,7 +13,7 @@ func Dim(x, y float32) float32 {
 }
 
 func dim(x, y float32) float32 {
-	return max(x-y, 0)
+	return Max(x-y, 0)
 }
 
 // Max returns the larger of x or y.
@@ -22,7 +24,8 @@ func dim(x, y float32) float32 {
 //	Max(+0, ±0) = Max(±0, +0) = +0
 //	Max(-0, -0) = -0
 func Max(x, y float32) float32 {
-	return max(x, y)
+	//return max(x, y)
+	return float32(math.Max(float64(x), float64(y)))
 }
 
 func max(x, y float32) float32 {
@@ -51,7 +54,8 @@ func max(x, y float32) float32 {
 //	Min(x, NaN) = Min(NaN, x) = NaN
 //	Min(-0, ±0) = Min(±0, -0) = -0
 func Min(x, y float32) float32 {
-	return min(x, y)
+	//return min(x, y)
+	return float32(math.Min(float64(x), float64(y)))
 }
 
 func min(x, y float32) float32 {
