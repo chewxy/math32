@@ -15,3 +15,7 @@ func Float64bits(f float64) uint64 { return *(*uint64)(unsafe.Pointer(&f)) }
 // Float64frombits returns the floating point number corresponding
 // the IEEE 754 binary representation b.
 func Float64frombits(b uint64) float64 { return *(*float64)(unsafe.Pointer(&b)) }
+
+func float32ibits(f float32) int32 { return *(*int32)(unsafe.Pointer(&f)) }
+
+func float32fromibits(b int32) float32 { return *(*float32)(unsafe.Pointer(&b)) }
