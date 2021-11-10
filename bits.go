@@ -7,6 +7,8 @@ const (
 	mask     = 0xFF
 	shift    = 32 - 8 - 1
 	bias     = 127
+	signMask = 1 << 31
+	fracMask = 1<<shift - 1
 )
 
 // Inf returns positive infinity if sign >= 0, negative infinity if sign < 0.
