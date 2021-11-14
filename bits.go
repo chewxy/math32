@@ -3,6 +3,7 @@ package math32
 const (
 	uvnan    = 0x7FE00000
 	uvinf    = 0x7F800000
+	uvone    = 0x3f800000
 	uvneginf = 0xFF800000
 	mask     = 0xFF
 	shift    = 32 - 8 - 1
