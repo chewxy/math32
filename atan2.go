@@ -1,7 +1,5 @@
 package math32
 
-import "math"
-
 // Atan2 returns the arc tangent of y/x, using the signs of the two to determine the quadrant of the return value.
 // Special cases are (in order):
 // 	Atan2(y, NaN) = NaN
@@ -22,5 +20,43 @@ import "math"
 // 	Atan2(+Inf, x) = +Pi/2
 // 	Atan2(-Inf, x) = -Pi/2
 func Atan2(y, x float32) float32 {
-	return float32(math.Atan2(float64(y), float64(x)))
+	// special cases
+	switch {
+	case IsNaN(y) || IsNaN(x):
+		return NaN()
+	case y == 0:
+		if x >= 0 && !Signbit(x) {
+			return Copysign(0, y)
+		}
+		return Copysign(Pi, y)
+	case x == 0:
+		return Copysign(Pi/2, y)
+	case IsInf(x, 0):
+		if IsInf(x, 1) {
+			switch {
+			case IsInf(y, 0):
+				return Copysign(Pi/4, y)
+			default:
+				return Copysign(0, y)
+			}
+		}
+		switch {
+		case IsInf(y, 0):
+			return Copysign(3*Pi/4, y)
+		default:
+			return Copysign(Pi, y)
+		}
+	case IsInf(y, 0):
+		return Copysign(Pi/2, y)
+	}
+
+	// Call atan and determine the quadrant.
+	q := Atan(y / x)
+	if x < 0 {
+		if q <= 0 {
+			return q + Pi
+		}
+		return q - Pi
+	}
+	return q
 }
