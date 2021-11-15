@@ -73,7 +73,12 @@ package math32
 //	Log(0) = -Inf
 //	Log(x < 0) = NaN
 //	Log(NaN) = NaN
-func Log(x float32) float32
+func Log(x float32) float32 {
+	if haveArchLog {
+		return archLog(x)
+	}
+	return log(x)
+}
 
 func log(x float32) float32 {
 	const (

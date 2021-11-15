@@ -10,8 +10,8 @@ TEXT ·Exp(SB),NOSPLIT,$0
 TEXT ·Exp2(SB),NOSPLIT,$0
 	B ·exp2(SB)
 
-// func Log(x float32) float32
-TEXT ·Log(SB),NOSPLIT,$0
+// func archLog(x float32) float32
+TEXT ·archLog(SB),NOSPLIT,$0
 	B ·log(SB)
 
 // func Remainder(x, y float32) float32
