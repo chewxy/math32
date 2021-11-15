@@ -8,8 +8,8 @@ TEXT ·Exp(SB),NOSPLIT,$0
 TEXT ·Log(SB),NOSPLIT,$0
 	BR ·log(SB)
 
-// func Remainder(x, y float32) float32
-TEXT ·Remainder(SB),NOSPLIT,$0
+// func archRemainder(x, y float32) float32
+TEXT ·archRemainder(SB),NOSPLIT,$0
 	BR ·remainder(SB)
 
 // func Sqrt(x float32) float32

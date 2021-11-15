@@ -4,5 +4,5 @@
 
 #include "textflag.h"
 
-TEXT ·Remainder(SB),NOSPLIT,$0
+TEXT ·archRemainder(SB),NOSPLIT,$0
 	JMP ·remainder(SB)
