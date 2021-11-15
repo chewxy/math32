@@ -1,7 +1,7 @@
 #include "textflag.h"
 
-// func Exp(x float32) float32
-TEXT ·Exp(SB),NOSPLIT,$0
+// func archExp(x float32) float32
+TEXT ·archExp(SB),NOSPLIT,$0
 	BR ·exp(SB)
 
 // func Log(x float32) float32
