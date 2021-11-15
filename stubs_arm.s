@@ -16,6 +16,6 @@ TEXT ·Log(SB),NOSPLIT,$0
 TEXT ·Remainder(SB),NOSPLIT,$0
 	B ·remainder(SB)
 
-// func Sqrt(x float32) float32
-TEXT ·Sqrt(SB),NOSPLIT,$0
+// func archSqrt(x float32) float32
+TEXT ·archSqrt(SB),NOSPLIT,$0
 	B ·sqrt(SB)

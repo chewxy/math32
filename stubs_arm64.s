@@ -1,6 +1,6 @@
 #include "textflag.h"
 
-// func Log(x float64) float64
+// func archLog(x float64) float64
 TEXT ·Log(SB),NOSPLIT,$0
 	B ·log(SB)
 

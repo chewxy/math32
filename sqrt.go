@@ -1,9 +1,14 @@
 package math32
 
-func Sqrt(x float32) float32
+func Sqrt(x float32) float32 {
+	if haveArchSqrt {
+		return archSqrt(x)
+	}
+	return noarchsqrt(x)
+}
 
 // TODO: add assembly for !build noasm
-func sqrt(x float32) float32 {
+func noarchsqrt(x float32) float32 {
 	// special cases
 	switch {
 	case x == 0 || IsNaN(x) || IsInf(x, 1):
