@@ -1591,7 +1591,7 @@ var sqrtSC = []float32{
 	0,
 	Inf(1),
 	NaN(),
-	3.1434555694052576e-162,
+	5.293955920339377e-23, // Sqrt(float64(Float32frombits(2))) result
 }
 
 var vftanhSC = []float32{
@@ -1887,7 +1887,7 @@ func TestCopysign(t *testing.T) {
 
 func TestCos(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
-		if f := Cos(vf[i]); !veryclose(cos[i], f) {
+		if f := Cos(vf[i]); !close(cos[i], f) {
 			t.Errorf("Cos(%g) = %g, want %g", vf[i], f, cos[i])
 		}
 	}
