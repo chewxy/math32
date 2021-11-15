@@ -1715,9 +1715,16 @@ func tolerance(a, b, e float32) bool {
 	}
 	return d < e
 }
-func close(a, b float32) bool      { return tolerance(a, b, 1e-5) } // the number gotten from the cfloat standard. Haskell's Linear package uses 1e-6 for floats
-func veryclose(a, b float32) bool  { return tolerance(a, b, 1e-6) } // from wiki
-func soclose(a, b, e float32) bool { return tolerance(a, b, e) }
+
+// 5e-1 tolerance
+func nearby(a, b float32) bool { return tolerance(a, b, 5e-1) } // for large trig inputs results may be far apart.
+
+// 1e-5 tolerance
+func close(a, b float32) bool { return tolerance(a, b, 1e-5) } // the number gotten from the cfloat standard. Haskell's Linear package uses 1e-6 for floats
+
+// 1e-6 tolerance
+func veryclose(a, b float32) bool    { return tolerance(a, b, 1e-6) } // from wiki
+func thisclose(a, b, e float32) bool { return tolerance(a, b, e) }
 func alike(a, b float32) bool {
 	switch {
 	case IsNaN(a) && IsNaN(b):
@@ -2108,7 +2115,7 @@ func TestFrexp(t *testing.T) {
 
 func TestGamma(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
-		if f := Gamma(vf[i]); !close(gamma[i], f) {
+		if f := Gamma(vf[i]); !thisclose(gamma[i], f, 1e-4) {
 			t.Errorf("Gamma(%g) = %g, want %g", vf[i], f, gamma[i])
 		}
 	}
@@ -2154,7 +2161,7 @@ func TestIlogb(t *testing.T) {
 
 func TestJ0(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
-		if f := J0(vf[i]); !soclose(j0[i], f, 4e-6) {
+		if f := J0(vf[i]); !thisclose(j0[i], f, 4e-5) {
 			t.Errorf("J0(%g) = %g, want %g", vf[i], f, j0[i])
 		}
 	}
@@ -2227,7 +2234,7 @@ func TestLdexp(t *testing.T) {
 
 func TestLgamma(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
-		if f, s := Lgamma(vf[i]); !close(lgamma[i].f, f) || lgamma[i].i != s {
+		if f, s := Lgamma(vf[i]); !thisclose(lgamma[i].f, f, 1e-4) || lgamma[i].i != s {
 			t.Errorf("Lgamma(%g) = %g, %d, want %g, %d", vf[i], f, s, lgamma[i].f, lgamma[i].i)
 		}
 	}
@@ -2334,7 +2341,7 @@ func TestLog2(t *testing.T) {
 
 func TestModf(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
-		if f, g := Modf(vf[i]); !veryclose(modf[i][0], f) || !veryclose(modf[i][1], g) {
+		if f, g := Modf(vf[i]); !veryclose(modf[i][0], f) || !thisclose(modf[i][1], g, 1e-4) {
 			t.Errorf("Modf(%g) = %g, %g, want %g, %g", vf[i], f, g, modf[i][0], modf[i][1])
 		}
 	}
@@ -2382,7 +2389,7 @@ func TestPow10(t *testing.T) {
 
 func TestRemainder(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
-		if f := Remainder(10, vf[i]); !close(remainder[i], f) {
+		if f := Remainder(10, vf[i]); !thisclose(remainder[i], f, 1e-4) {
 			t.Errorf("Remainder(10, %g) = %g, want %g", vf[i], f, remainder[i])
 		}
 	}
@@ -2407,7 +2414,7 @@ func TestSignbit(t *testing.T) {
 }
 func TestSin(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
-		if f := Sin(vf[i]); !veryclose(sin[i], f) {
+		if f := Sin(vf[i]); !close(sin[i], f) {
 			t.Errorf("Sin(%g) = %g, want %g", vf[i], f, sin[i])
 		}
 	}
@@ -2420,7 +2427,7 @@ func TestSin(t *testing.T) {
 
 func TestSincos(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
-		if s, c := Sincos(vf[i]); !veryclose(sin[i], s) || !veryclose(cos[i], c) {
+		if s, c := Sincos(vf[i]); !close(sin[i], s) || !close(cos[i], c) {
 			t.Errorf("Sincos(%g) = %g, %g want %g, %g", vf[i], s, c, sin[i], cos[i])
 		}
 	}
@@ -2440,13 +2447,13 @@ func TestSinh(t *testing.T) {
 }
 
 func TestSqrt(t *testing.T) {
+	const tol = 1e-7
 	for i := 0; i < len(vf); i++ {
 		a := Abs(vf[i])
-		if f := SqrtGo(a); sqrt[i] != f {
+		if f := SqrtGo(a); !thisclose(f, sqrt[i], tol) {
 			t.Errorf("SqrtGo(%g) = %g, want %g", a, f, sqrt[i])
 		}
-		a = Abs(vf[i])
-		if f := Sqrt(a); sqrt[i] != f {
+		if f := Sqrt(a); !thisclose(f, sqrt[i], tol) {
 			t.Errorf("Sqrt(%g) = %g, want %g", a, f, sqrt[i])
 		}
 	}
@@ -2462,7 +2469,7 @@ func TestSqrt(t *testing.T) {
 
 func TestTan(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
-		if f := Tan(vf[i]); !veryclose(tan[i], f) {
+		if f := Tan(vf[i]); !close(tan[i], f) {
 			t.Errorf("Tan(%g) = %g, want %g", vf[i], f, tan[i])
 		}
 	}
@@ -2517,7 +2524,7 @@ func TestY0(t *testing.T) {
 func TestY1(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
 		a := Abs(vf[i])
-		if f := Y1(a); !soclose(y1[i], f, 2e-14) {
+		if f := Y1(a); !close(y1[i], f) {
 			t.Errorf("Y1(%g) = %g, want %g", a, f, y1[i])
 		}
 	}
@@ -2557,7 +2564,7 @@ func TestLargeCos(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
 		f1 := cosLarge[i]
 		f2 := Cos(vf[i] + large)
-		if !close(f1, f2) {
+		if !nearby(f1, f2) {
 			t.Errorf("Cos(%g) = %g, want %g", vf[i]+large, f2, f1)
 		}
 	}
@@ -2568,7 +2575,7 @@ func TestLargeSin(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
 		f1 := sinLarge[i]
 		f2 := Sin(vf[i] + large)
-		if !close(f1, f2) {
+		if !nearby(f1, f2) {
 			t.Errorf("Sin(%g) = %g, want %g", vf[i]+large, f2, f1)
 		}
 	}
@@ -2579,7 +2586,7 @@ func TestLargeSincos(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
 		f1, g1 := sinLarge[i], cosLarge[i]
 		f2, g2 := Sincos(vf[i] + large)
-		if !close(f1, f2) || !close(g1, g2) {
+		if !nearby(f1, f2) || !nearby(g1, g2) {
 			t.Errorf("Sincos(%g) = %g, %g, want %g, %g", vf[i]+large, f2, g2, f1, g1)
 		}
 	}
@@ -2590,7 +2597,7 @@ func TestLargeTan(t *testing.T) {
 	for i := 0; i < len(vf); i++ {
 		f1 := tanLarge[i]
 		f2 := Tan(vf[i] + large)
-		if !close(f1, f2) {
+		if !nearby(f1, f2) {
 			t.Errorf("Tan(%g) = %g, want %g", vf[i]+large, f2, f1)
 		}
 	}
