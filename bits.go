@@ -4,6 +4,7 @@ const (
 	uvnan    = 0x7FE00000
 	uvinf    = 0x7F800000
 	uvneginf = 0xFF800000
+	notmask  = 0x000FFFFF
 	mask     = 0xFF
 	shift    = 32 - 8 - 1
 	bias     = 127
