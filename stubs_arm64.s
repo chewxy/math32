@@ -4,5 +4,5 @@
 TEXT ·Log(SB),NOSPLIT,$0
 	B ·log(SB)
 
-TEXT ·Remainder(SB),NOSPLIT,$0
+TEXT ·archRemainder(SB),NOSPLIT,$0
 	B ·remainder(SB)
