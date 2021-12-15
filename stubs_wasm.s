@@ -10,8 +10,8 @@ TEXT ·archExp(SB),NOSPLIT,$0
 TEXT ·archExp2(SB),NOSPLIT,$0
 	JMP ·exp2(SB)
 
-// func Log(x float32) float32
-TEXT ·Log(SB),NOSPLIT,$0
+// func archLog(x float32) float32
+TEXT ·archLog(SB),NOSPLIT,$0
 	JMP ·log(SB)
 
 // func archRemainder(x, y float32) float32
