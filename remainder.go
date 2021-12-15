@@ -30,7 +30,12 @@ package math32
 //	Remainder(x, 0) = NaN
 //	Remainder(x, ±Inf) = x
 //	Remainder(x, NaN) = NaN
-func Remainder(x, y float32) float32
+func Remainder(x, y float32) float32 {
+	if haveArchRemainder {
+		return archRemainder(x, y)
+	}
+	return remainder(x, y)
+}
 
 func remainder(x, y float32) float32 {
 

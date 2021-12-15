@@ -1,17 +1,17 @@
 #include "textflag.h"
 
-// func Exp(x float32) float32
-TEXT ·Exp(SB),NOSPLIT,$0
+// func archExp(x float32) float32
+TEXT ·archExp(SB),NOSPLIT,$0
 	BR ·exp(SB)
 
 // func archLog(x float32) float32
 TEXT ·archLog(SB),NOSPLIT,$0
 	BR ·log(SB)
 
-// func Remainder(x, y float32) float32
-TEXT ·Remainder(SB),NOSPLIT,$0
+// func archRemainder(x, y float32) float32
+TEXT ·archRemainder(SB),NOSPLIT,$0
 	BR ·remainder(SB)
 
-// func Sqrt(x float32) float32
-TEXT ·Sqrt(SB),NOSPLIT,$0
+// func archSqrt(x float32) float32
+TEXT ·archSqrt(SB),NOSPLIT,$0
 	BR ·sqrt(SB)
