@@ -32,7 +32,6 @@ func exp(x float32) float32 {
 	case x > Overflow:
 		return Inf(1)
 	case x < Underflow:
-		return 0
 		// case hx > LogMax:
 		// 	return Inf(1)
 		// case x < 0 && hx > LogMin:

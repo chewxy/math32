@@ -2,9 +2,9 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-//go:build !noasm && (arm64 || amd64 || 386 || arm || ppc64le || risc64 || wasm || s390x)
+//go:build !noasm && (amd64 || 386 || arm || ppc64le || wasm || s390x)
 // +build !noasm
-// +build arm64 amd64 386 arm ppc64le risc64 wasm s390x
+// +build amd64 386 arm ppc64le wasm s390x
 
 package math32
 

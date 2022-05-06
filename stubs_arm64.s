@@ -4,5 +4,6 @@
 TEXT ·archLog(SB),NOSPLIT,$0
 	B ·log(SB)
 
-TEXT ·archRemainder(SB),NOSPLIT,$0
-	B ·remainder(SB)
+// func archRemainder(x float32) float32 // TODO
+// TEXT ·archRemainderTODO(SB),NOSPLIT,$0
+//	B ·remainder(SB)
