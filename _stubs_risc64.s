@@ -1,6 +1,4 @@
-// +build riscv
-
-#include "textflag.h"
+ #include "textflag.h"
 
 // func archExp(x float32) float32
 TEXT ·archExp(SB),NOSPLIT,$0

@@ -23,7 +23,7 @@
 // This is an assembly implementation of the method used for function Exp in file exp.go.
 //
 // func archExp(x float32) float32
-TEXT ·archExp(SB),$0-16
+TEXT ·archExp(SB),$0-12
 	FMOVS	x+0(FP), F0	// F0 = x
 	FCMPS	F0, F0
 	BNE	isNaN		// x = NaN, return NaN
@@ -109,7 +109,7 @@ overflow:
 // This is an assembly implementation of the method used for function Exp2 in file exp.go.
 //
 // func archExp2(x float32) float32
-TEXT ·archExp2(SB),$0-16
+TEXT ·archExp2(SB),$0-12 // Is this correct?
 	FMOVS	x+0(FP), F0	// F0 = x
 	FCMPS	F0, F0
 	BNE	isNaN		// x = NaN, return NaN
