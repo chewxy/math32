@@ -1,3 +1,6 @@
+//go:build !tinygo
+// +build !tinygo
+
 package math32
 
 import (
