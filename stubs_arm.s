@@ -14,7 +14,7 @@ TEXT ·archLog(SB),NOSPLIT,$0
 
 // func archRemainder(x, y float32) float32
 TEXT ·archRemainder(SB),NOSPLIT,$0
-	B ·archRemainder(SB)
+	B ·remainder(SB)
 
 // func archSqrt(x float32) float32
 TEXT ·archSqrt(SB),NOSPLIT,$0
