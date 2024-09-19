@@ -1,3 +1,4 @@
+//go:build !tinygo && !noasm
 #include "textflag.h"
 
 // func archLog(x float64) float64

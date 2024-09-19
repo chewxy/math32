@@ -1,4 +1,5 @@
- #include "textflag.h"
+//go:build !tinygo && !noasm
+#include "textflag.h"
 
 // func archExp(x float32) float32
 TEXT ·archExp(SB),NOSPLIT,$0

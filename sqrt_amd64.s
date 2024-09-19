@@ -1,3 +1,4 @@
+//go:build !tinygo && !noasm
 #include "textflag.h"
 
 // func archSqrt(x float32) float32

@@ -7,6 +7,7 @@ package math32
 // Nextafter returns the next representable float32 value after x towards y.
 //
 // Special cases are:
+//
 //	Nextafter32(x, x)   = x
 //	Nextafter32(NaN, y) = NaN
 //	Nextafter32(x, NaN) = NaN

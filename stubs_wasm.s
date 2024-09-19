@@ -1,4 +1,5 @@
-// +build wasm
+//go:build wasm && !tinygo && !noasm
+// +build wasm,!tinygo,!noasm
 
 #include "textflag.h"
 
