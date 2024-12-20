@@ -1,5 +1,12 @@
 package math32
 
+// Sinh returns the hyperbolic sine of x.
+//
+// Special cases are:
+//
+//	Sinh(±0) = ±0
+//	Sinh(±Inf) = ±Inf
+//	Sinh(NaN) = NaN
 func Sinh(x float32) float32 {
 	// The coefficients are #2029 from Hart & Cheney. (20.36D)
 	const (
@@ -25,7 +32,7 @@ func Sinh(x float32) float32 {
 
 	case x > 0.5:
 		ex := Exp(x)
-		temp = (ex - 1/ex) * 0.5
+		temp = (ex - 1./ex) * 0.5
 
 	default:
 		sq := x * x

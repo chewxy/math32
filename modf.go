@@ -4,6 +4,7 @@ package math32
 // that sum to f. Both values have the same sign as f.
 //
 // Special cases are:
+//
 //	Modf(±Inf) = ±Inf, NaN
 //	Modf(NaN) = NaN, NaN
 func Modf(f float32) (int float32, frac float32) {

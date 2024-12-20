@@ -84,7 +84,7 @@ func satan(x float32) float32 {
 		return xatan(x)
 	}
 	if x > Tan3pio8 {
-		return Pi/2 - xatan(1/x) + Morebits
+		return Pi/2 - xatan(1./x) + Morebits
 	}
 	return Pi/4 + xatan((x-1)/(x+1)) + 0.5*Morebits
 }

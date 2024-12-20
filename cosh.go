@@ -6,5 +6,5 @@ func Cosh(x float32) float32 {
 		return Exp(x) * 0.5
 	}
 	ex := Exp(x)
-	return (ex + 1/ex) * 0.5
+	return (ex + 1./ex) * 0.5
 }

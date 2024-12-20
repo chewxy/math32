@@ -29,6 +29,7 @@ package math32
 // Asinh returns the inverse hyperbolic sine of x.
 //
 // Special cases are:
+//
 //	Asinh(±0) = ±0
 //	Asinh(±Inf) = ±Inf
 //	Asinh(NaN) = NaN
@@ -52,7 +53,7 @@ func Asinh(x float32) float32 {
 	case x > Large:
 		temp = Log(x) + Ln2 // |x| > 2**28
 	case x > 2:
-		temp = Log(2*x + 1/(Sqrt(x*x+1)+x)) // 2**28 > |x| > 2.0
+		temp = Log(2*x + 1./(Sqrt(x*x+1)+x)) // 2**28 > |x| > 2.0
 	case x < NearZero:
 		temp = x // |x| < 2**-28
 	default:

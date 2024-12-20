@@ -6,6 +6,7 @@ package math32
 // with the absolute value of frac in the interval [½, 1).
 //
 // Special cases are:
+//
 //	Frexp(±0) = ±0, 0
 //	Frexp(±Inf) = ±Inf, 0
 //	Frexp(NaN) = NaN, 0

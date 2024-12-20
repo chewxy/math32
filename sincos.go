@@ -4,7 +4,9 @@
 
 package math32
 
-import "math/bits"
+import (
+	"math/bits"
+)
 
 /*
 	Floating-point sine and cosine.
@@ -114,6 +116,7 @@ var _cos = [...]float32{
 // Sincos returns Sin(x), Cos(x).
 //
 // Special cases are:
+//
 //	Sincos(±0) = ±0, 1
 //	Sincos(±Inf) = NaN, NaN
 //	Sincos(NaN) = NaN, NaN
@@ -179,6 +182,7 @@ func Sincos(x float32) (sin, cos float32) {
 // Sin returns the sine of the radian argument x.
 //
 // Special cases are:
+//
 //	Sin(±0) = ±0
 //	Sin(±Inf) = NaN
 //	Sin(NaN) = NaN
@@ -239,6 +243,7 @@ func Sin(x float32) float32 {
 // Cos returns the cosine of the radian argument x.
 //
 // Special cases are:
+//
 //	Cos(±Inf) = NaN
 //	Cos(NaN) = NaN
 func Cos(x float32) float32 {
@@ -300,7 +305,9 @@ func Cos(x float32) float32 {
 // where y is given by y = floor(x * (4 / Pi)) and C is the leading partial
 // terms of 4/Pi. Since the leading terms (PI4A and PI4B in sin.go) have 30
 // and 32 trailing zero bits, y should have less than 30 significant bits.
+//
 //	y < 1<<30  -> floor(x*4/Pi) < 1<<30 -> x < (1<<30 - 1) * Pi/4
+//
 // So, conservatively we can take x < 1<<29.
 // Above this threshold Payne-Hanek range reduction must be used.
 const reduceThreshold = 1 << 29

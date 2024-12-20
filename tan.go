@@ -69,6 +69,13 @@ var _tanQ = [...]float32{
 	-5.38695755929454629881e7, //0xc189afe03cbe5a31
 }
 
+// Tan returns the tangent of the radian argument x.
+//
+// Special cases are:
+//
+//	Tan(±0) = ±0
+//	Tan(±Inf) = NaN
+//	Tan(NaN) = NaN
 func Tan(x float32) float32 {
 	return tan(x)
 }

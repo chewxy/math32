@@ -51,6 +51,13 @@ Direct inquiries to 30 Frost Street, Cambridge, MA 02140
  * rms relative error: 2.6e-8
  */
 
+// Tanh returns the hyperbolic tangent of x.
+//
+// Special cases are:
+//
+//	Tanh(±0) = ±0
+//	Tanh(±Inf) = ±1
+//	Tanh(NaN) = NaN
 func Tanh(x float32) float32 {
 	const MAXLOG = 88.02969187150841
 	z := Abs(x)
@@ -71,7 +78,7 @@ func Tanh(x float32) float32 {
 			return x
 		}
 		s := x * x
-		z = ((((-5.70498872745E-3*s+2.06390887954E-2)*s-5.37397155531E-2)*s+1.33314422036E-1)*s-3.33332819422E-1)*s*x + x
+		z = ((((-5.70498872745e-3*s+2.06390887954e-2)*s-5.37397155531e-2)*s+1.33314422036e-1)*s-3.33332819422e-1)*s*x + x
 	}
 	return z
 }

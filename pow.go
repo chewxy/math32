@@ -13,6 +13,7 @@ func isOddInt(x float32) bool {
 // Pow returns x**y, the base-x exponential of y.
 //
 // Special cases are (in order):
+//
 //	Pow(x, ±0) = 1 for any x
 //	Pow(1, y) = 1 for any y
 //	Pow(x, 1) = x for any x
@@ -69,7 +70,7 @@ func Pow(x, y float32) float32 {
 		}
 	case IsInf(x, 0):
 		if IsInf(x, -1) {
-			return Pow(1/x, -y) // Pow(-0, -y)
+			return Pow(1./x, -y) // Pow(-0, -y)
 		}
 		switch {
 		case y < 0:

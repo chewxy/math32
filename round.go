@@ -3,6 +3,7 @@ package math32
 // Round returns the nearest integer, rounding half away from zero.
 //
 // Special cases are:
+//
 //	Round(±0) = ±0
 //	Round(±Inf) = ±Inf
 //	Round(NaN) = NaN
@@ -40,6 +41,7 @@ func Round(x float32) float32 {
 // RoundToEven returns the nearest integer, rounding ties to even.
 //
 // Special cases are:
+//
 //	RoundToEven(±0) = ±0
 //	RoundToEven(±Inf) = ±Inf
 //	RoundToEven(NaN) = NaN
