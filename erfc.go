@@ -12,3 +12,15 @@ import "math"
 func Erfc(x float32) float32 {
 	return float32(math.Erfc(float64(x)))
 }
+
+// Erfcinv returns the inverse of [Erfc](x).
+//
+// Special cases are:
+//
+//	Erfcinv(0) = +Inf
+//	Erfcinv(2) = -Inf
+//	Erfcinv(x) = NaN if x < 0 or x > 2
+//	Erfcinv(NaN) = NaN
+func Erfcinv(x float32) float32 {
+	return float32(math.Erfcinv(float64(x)))
+}
