@@ -26,3 +26,8 @@ func Nextafter(x, y float32) (r float32) {
 	}
 	return
 }
+
+// Nextafter32 is just a [Nextafter] wrapper.
+func Nextafter32(x, y float32) float32 {
+	return Nextafter(x, y)
+}
