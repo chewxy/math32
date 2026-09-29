@@ -120,7 +120,8 @@ func TestFMASingleRounding(t *testing.T) {
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
 			// Confirm the test is set up correctly: naive impl gives the wrong answer.
-			naive := c.x*c.y + c.z
+			// riscv64 and arm64 fuse x*y+z, so convert explicitly
+			naive := float32(c.x*c.y) + c.z
 			if naive != c.naiveWant {
 				t.Fatalf("test setup error: naive x*y+z = %v, expected naiveWant %v",
 					naive, c.naiveWant)
