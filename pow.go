@@ -3,6 +3,10 @@ package math32
 import "math"
 
 func isOddInt(x float32) bool {
+	if Abs(x) >= 1<<24 {
+		// Every float32 integer beyond the mantissa precision is even.
+		return false
+	}
 	xi, xf := Modf(x)
 	return xf == 0 && int32(xi)&1 == 1
 }
@@ -91,7 +95,15 @@ func Pow(x, y float32) float32 {
 		return NaN()
 	}
 	if yi >= 1<<31 {
-		return Exp(y * Log(x))
+		// Every float32 integer at this magnitude is even, and any
+		// float32 base other than ±1 must overflow or underflow.
+		if Abs(x) == 1 {
+			return 1
+		}
+		if (Abs(x) < 1) == (y > 0) {
+			return 0
+		}
+		return Inf(1)
 	}
 
 	// ans = a1 * 2**ae (= 1 for now).
