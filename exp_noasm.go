@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-//go:build noasm || tinygo || !(amd64 || 386 || arm || ppc64le || wasm || s390x)
-// +build noasm tinygo !amd64,!386,!arm,!ppc64le,!wasm,!s390x
+//go:build noasm || tinygo || (!amd64 && !386 && !arm && !wasm)
+// +build noasm tinygo !amd64,!386,!arm,!wasm
 
 package math32
 
