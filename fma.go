@@ -20,11 +20,17 @@ func stickyRSh(x uint64, s uint) uint64 {
 
 // FMA returns x * y + z, computed with only one rounding.
 // (That is, FMA returns the fused multiply-add of x, y, and z.)
-//
-// Ported from fma_model_ieee in
+func FMA(x, y, z float32) float32 {
+	if haveArchFMA {
+		return archFMA(x, y, z)
+	}
+	return fma(x, y, z)
+}
+
+// fma is the software implementation of FMA, ported from fma_model_ieee in
 // https://github.com/tenstorrent/tt-isa-documentation/blob/main/Miscellaneous/FMA/fma.c
 // (Apache-2.0).
-func FMA(x, y, z float32) float32 {
+func fma(x, y, z float32) float32 {
 	bx := Float32bits(x)
 	by := Float32bits(y)
 	bz := Float32bits(z)

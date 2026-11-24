@@ -8,6 +8,9 @@ package math32
 //	Floor(±Inf) = ±Inf
 //	Floor(NaN) = NaN
 func Floor(x float32) float32 {
+	if haveArchFloor {
+		return archFloor(x)
+	}
 	return floor(x)
 }
 
@@ -34,11 +37,14 @@ func floor(x float32) float32 {
 //	Ceil(±Inf) = ±Inf
 //	Ceil(NaN) = NaN
 func Ceil(x float32) float32 {
+	if haveArchCeil {
+		return archCeil(x)
+	}
 	return ceil(x)
 }
 
 func ceil(x float32) float32 {
-	return -Floor(-x)
+	return -floor(-x)
 }
 
 // Trunc returns the integer value of x.
@@ -49,6 +55,9 @@ func ceil(x float32) float32 {
 //	Trunc(±Inf) = ±Inf
 //	Trunc(NaN) = NaN
 func Trunc(x float32) float32 {
+	if haveArchTrunc {
+		return archTrunc(x)
+	}
 	return trunc(x)
 }
 
