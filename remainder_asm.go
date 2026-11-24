@@ -1,7 +1,7 @@
-//go:build !noasm && !tinygo && (amd64 || s390x || arm || ppc64le || 386 || wasm)
+//go:build !noasm && !tinygo && (amd64 || arm || 386 || wasm)
 // +build !noasm
 // +build !tinygo
-// +build amd64 s390x arm ppc64le 386 wasm
+// +build amd64 arm 386 wasm
 
 package math32
 

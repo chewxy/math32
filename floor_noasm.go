@@ -1,5 +1,5 @@
-//go:build noasm || tinygo || (!arm64 && !riscv64)
-// +build noasm tinygo !arm64,!riscv64
+//go:build noasm || tinygo || (!arm64 && !ppc64le && !riscv64 && !s390x)
+// +build noasm tinygo !arm64,!ppc64le,!riscv64,!s390x
 
 package math32
 
